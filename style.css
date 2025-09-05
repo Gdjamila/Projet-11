@@ -1,11 +1,85 @@
 /*
-Theme Name: mon-theme
+Theme Name: theme-perso
 Theme URI: http://localhost/mon-site
-Author: Ton Nom
+Author: Djamila GARECHE
 Author URI: http://localhost
 Description: Mon premier thème WordPress personnalisé
 Version: 1.0
-License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: mon-theme
 */
+/* === Header === */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.site-content {
+    flex: 1; /* prend tout l’espace dispo */
+}
+/* === Header === */
+.site-header {
+    display: flex;                 /* disposition en ligne */
+    justify-content: space-between; /* espace entre logo et menu */
+    align-items: center;            /* alignement vertical */
+    padding: 12px 80px; 
+    background-color: #fff;         /* fond blanc */
+    border-bottom: 1px solid #434141; /* bordure grise */
+}
+.site-header .logo a {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+.site-header .logo img {
+    max-height: 12px; /*  logo  */
+    max-width: 200px;
+    display: block; /* évite les petits espaces en dessous de l’image */
+    opacity: 1;
+}
+.site-header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px; 
+    text-decoration: none;
+}
+
+.site-header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.site-header nav a:hover {
+    color: #0073aa; /* bleu WordPress au survol */
+}
+/* === footer === */
+.site-footer {
+    background: white;
+    padding: 8px 32px; /* réduit l’espace haut/bas */
+    text-align: center;
+    border-top: 3px solid #ddd;
+}
+.site-footer .footer-links {
+    margin: 0;           /* supprime toute marge par défaut */
+    font-size: 14px;
+    color: #333;
+}
+.site-footer .footer-links a {
+    text-decoration: none;
+    color: inherit; /* garde la même couleur que le texte */
+    margin: 0 25px; /* espace entre les liens */
+}
+
+/* === Responsive : menu sur mobile === */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
