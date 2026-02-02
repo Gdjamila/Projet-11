@@ -6,17 +6,33 @@ Author URI: http://localhost
 Description: Mon premier thème WordPress personnalisé
 Version: 1.0
 */
-/* === Header === */
+/* ================== Sticky footer ===================== */
+
 html, body {
-    height: 100%;
-    margin: 0;
+    height: 100%;   /* occupe toute la hauteur de la fenêtre */
+    margin: 0;      /* enlève les marges par défaut */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* empile header, contenu, footer en colonne */
 }
 .site-content {
-    flex: 1; /* prend tout l’espace dispo */
+    flex: 1; /* prend tout l’espace disponible */
 }
-/* === Header === */
+
+/* ================== Fonts =============== */
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: url('assets/fonts/Poppins-SemiBold.ttf') format('truetype');
+  font-display: swap; /* Permet de charger la police rapidement sans blocage */
+}
+
+@font-face {
+  font-family: 'SpaceMono-Regular.ttf';
+  src: url('assets/fonts/SpaceMono-Regular.ttf') format('truetype');
+  font-display: swap; 
+}
+
+/* ================== Header ===================== */
+
 .site-header {
     display: flex;                 /* disposition en ligne */
     justify-content: space-between; /* espace entre logo et menu */
@@ -31,9 +47,10 @@ html, body {
     font-weight: bold;
     color: #333;
 }
+/* ==== logo === */
 .site-header .logo img {
-    max-height: 12px; /*  logo  */
-    max-width: 200px;
+    max-height: 12px; 
+    width: auto;
     display: block; /* évite les petits espaces en dessous de l’image */
     opacity: 1;
 }
@@ -43,20 +60,27 @@ html, body {
     gap: 40px; 
     text-decoration: none;
 }
-
 .site-header nav a {
     text-decoration: none;
-    color: #333;
-    font-weight: 500;
+    color: #000000;
+    font-family: "SpaceMono-Regular", sans-serif;
+    font-weight: 300;
     transition: color 0.3s ease;
+    font-size: 14px;
 }
+
+/* === effet au survol == */
 .site-header nav a:hover {
-    color: #0073aa; /* bleu WordPress au survol */
+    font-size: 15px;
+    font-weight: 00; 
+    color: rgb(205, 108, 108);
 }
-/* === footer === */
+
+ /* ================== footer ===================== */
+
 .site-footer {
     background: white;
-    padding: 8px 32px; /* réduit l’espace haut/bas */
+    padding: 8px 32px; /* (Contrôle) réduit l’espace haut/bas */
     text-align: center;
     border-top: 3px solid #ddd;
 }
@@ -68,18 +92,169 @@ html, body {
 .site-footer .footer-links a {
     text-decoration: none;
     color: inherit; /* garde la même couleur que le texte */
-    margin: 0 25px; /* espace entre les liens */
+    margin: 0 25px; /* espace entre les liens). */
 }
 
-/* === Responsive : menu sur mobile === */
-@media (max-width: 768px) {
-    .site-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+/* ============= La modale ============= */
 
-    .site-header nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
+/* Titre répété */
+.contact-modal-content .contact-modal-header {
+  display: block;
+  margin: 0 -18px;        /* annule le padding horizontal du parent */
+  box-sizing: border-box; /* important pour que padding soit inclus dans la largeur*/
+  font-family: 'Poppins-SemiBold', 'Arial', 'Helvetica', sans-serif;
+  font-style: italic;
+  font-size: 33px;
+  text-transform: uppercase;
+  color: black; 
+  line-height: 0.92;        /* espace vertical entre les lignes */
+  word-break: break-all;  
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 25px;
+  padding: 0;
+ }
+/* La modale est cachée par défaut */
+#contact-modal.contact-modal {
+  display: none;           /* masqué par défaut */
+  position: fixed;         /* overlay entire viewport */
+  inset: 0;                /* top/right/bottom/left: 0 */
+  z-index: 9999 !important;
+  background-color: rgb(36, 36, 36);
+  justify-content: center;
+  align-items: center;
+  opacity: 10px;
+  transition: opacity 0.25s ease; /* animation douce */
+ }
+
+/* Avec la classe "show", elle devient visible */
+#contact-modal.contact-modal.show {
+  display: flex !important; /* Pour centrer le contenu */
+  opacity: 1; /* visible */
 }
+
+/* Boîte interne (contenu de la modale) */
+.contact-modal-content {
+  position: relative; 
+  padding-top: 30px; 
+  border-radius: 8px;
+  max-width: 352px;
+  width: calc(100% - 40px);
+  
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  transform: translateY(0);
+  border-left: 10px solid black;
+  border-right: 6px solid black;
+  border-top: 4px solid black;
+  border-bottom: 2px solid black;
+  box-sizing: border-box;
+  z-index: 1;
+  background-color: white;
+  min-height: 500px; /* hauteur min fixe pour que le contenu ne “saute” pas trop quand le message s’ajoute : */
+}
+/* ============= le formulaire ============== */
+
+/* Le formulaire reste centré dans la modale */
+.wpcf7 form {
+  width: 100%;
+  max-width: 202px;
+  margin: auto; /* centre horizontalement */
+  align-items: center;
+  padding: 0;           
+  box-sizing: border-box;
+}
+
+/* bloc label + champ */
+.wpcf7 form p {
+ margin: 11px;  /*espace entre chaque bloc */
+ }
+
+ /* Label aligné à gauche */
+.contact-modal-content .wpcf7 form label {
+  display: block;    /* chaque label prend toute la ligne */    
+  width: 100%;
+  text-align: left;   /* alignement du texte à gauche */
+  margin-bottom: 4px; /* petit espace entre label et champ */
+  font-family: 'Poppins-SemiBold', sans-serif;
+  font-size: 10px;
+  color: #313144;
+  font-weight: 550;
+ }
+ 
+/* Champs de saisie prennent toute la largeur du label */
+.wpcf7 input[type="text"],
+.wpcf7 input[type="email"],
+.wpcf7 textarea,
+.wpcf7 input[type="url"],
+.wpcf7 input[type="tel"],
+.wpcf7 input[type="submit"]
+ {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 7px;
+  border: 1px solid #c3c4c7;
+}
+/* Champs de saisie + Zone de texte (message) */
+.wpcf7 input,
+.wpcf7 textarea {
+  margin-top: 2px; /* espace entre le label et le champ */
+  width: 100%;     /* prend toute la largeur du bloc */
+  max-width: 200px; /* largeur des champs  */  
+  border-radius: 4px;
+  box-sizing: border-box; /* important pour un rendu stable */
+}
+/* Champs de saisie */ 
+.wpcf7 input{
+  height: 30px;
+ }
+
+/* Bouton envoyer */
+.wpcf7 input[type="submit"] {
+  background: #d8d8d8;
+  color: #000000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "SpaceMono-Regular", sans-serif;
+  font-weight: 550;
+  height: 35px;
+  font-size: 11px;
+  color: #313144;
+  }
+
+.wpcf7 form .wpcf7-response-output {
+  margin: 1;   /* petit espace au-dessus */
+  padding: 0; 
+  text-align: center;    /* centrer le texte */
+} 
+/* Message */
+.wpcf7 form.invalid .wpcf7-response-output,
+.wpcf7 form.unaccepted .wpcf7-response-output,
+.wpcf7 form.payment-required .wpcf7-response-output {
+  border-color: #ffb900;
+  margin-top: -25px;
+  font-size: 12px;
+  padding: 1px;
+}
+/* Confirmation d'envoi de Message */
+.wpcf7 form.sent .wpcf7-response-output {
+  margin-top: -35px;
+  padding: 0;
+  font-size: 13px;
+  color:rgb(58, 128, 58);
+}
+
+.wpcf7 input[type="submit"]:hover {
+  background: #000000;
+  color: white;
+ }
+
+
+
+
+
+
+
+
+ 

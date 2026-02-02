@@ -19,13 +19,15 @@
     ?>
     </div>
 
+<!--Affiche le menu dans l'en-tête --> 
     <nav class="main-nav">
         <?php
-        wp_nav_menu(array(
+        wp_nav_menu(array(      
             'theme_location' => 'main-menu', // celui déclaré dans functions.php
             'container'      => false,       // pas de <div> supplémentaire
             'menu_class'     => 'menu',      // classe CSS pour le <ul>
         ));
         ?>
-    </nav>
+     </nav>
 </header>
+

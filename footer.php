@@ -4,8 +4,13 @@
         <a href="#">VIE PRIVÉE</a>  
         TOUS DROITS RÉSERVÉS
     </div>
+</footer>    
+    <!-- Inclusion de la modale, mais cachée par défaut -->
+    <?php get_template_part('template-parts/modal', 'contact'); ?>
+    
+    <!-- Hook WordPress pour charger les scripts -->
     <?php wp_footer(); ?>
-</footer>
+
 </body>
 </html>
   
