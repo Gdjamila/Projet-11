@@ -43,3 +43,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+  /* ==== Ouverture de la modale + préremplissage automatique du champ “RÉF. PHOTO” (jQuery) ==== */
+
+  jQuery(document).ready(function ($) {
+
+    $('.open-contact-modal').on('click', function () {
+
+        // Récupère la référence photo depuis la page
+        let photoRef = $('#photo-ref').data('photo-ref');
+
+        // Remplit le champ CF7
+        $('input[name="your-refPhoto"]').val(photoRef);
+
+    });
+});
+
