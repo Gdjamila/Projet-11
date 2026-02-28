@@ -4,16 +4,16 @@
    <!--  Vérifie s'il existe au moins un contenu à afficher -->
     <?php if ( have_posts() ) : 
       // tant qu'il y a un contenu
-      while ( have_posts() ) :
-        // On charge les données de la photo courante
-        the_post(); ?>
+      while ( have_posts() ) : // Tant qu'il y a des contenus, on les parcourt un par un
+        
+        the_post(); ?> <!-- charge les données de la photo courante -->
      
          <article class="photo-content">
 
             <div class="photo-image">
                <?php the_post_thumbnail('large'); ?> <!-- Correspond à une taille d’image WordPress -->
             </div>
-            <!-- Informations de la photo (champs personnalisés) -->
+            <!--======== Informations de la photo (champs personnalisés) ======== -->
             <div class="photo-details">
                
                <h1 class="photo-title">
@@ -55,16 +55,73 @@
          </article>
       <?php endwhile; endif; ?>
 
-               <!-- Navigation entre les photos -->
-               <nav class="photo-navigation">
+   <!-- ====================== Navigation entre les photos ====================== -->
+   <nav class="photo-navigation">
 
-                  <div class="photo-prev">
-                     <?php previous_post_link('%link', '← Photo précédente'); ?>
-                  </div>
-                  <div class="photo-next">
-                     <?php next_post_link('%link', 'Photo suivante →'); ?>
-                  </div>
-               </nav>
+      <div class="photo-prev">
+         <?php previous_post_link('%link', '← Photo précédente'); ?>
+      </div>
+      <div class="photo-next">
+         <?php next_post_link('%link', 'Photo suivante →'); ?>
+      </div>
+   </nav>
+    
+   <!-- ========================== Zone des photos apparentées ========================== -->
+    
+   <section class="photos-related">
+   <h2>Photos apparentées</h2>
+
+  <?php
+  // Récupère les catégories de la photo actuellement affichée
+  $terms = get_the_terms( get_the_ID(), 'categorie' );
+
+  // Vérifie qu’il existe bien des catégories
+  if ( $terms && ! is_wp_error( $terms ) ) {
+
+    // Récupère uniquement les ID des catégories
+    $term_ids = wp_list_pluck( $terms, 'term_id' );
+
+    // Arguments de la requête WP_Query
+    $args = [
+      // Type de contenu : Photo (CPT)
+      'post_type'      => 'photo',
+
+      // Nombre de photos apparentées à afficher
+      'posts_per_page' => 4,
+
+      // Exclut la photo actuellement affichée
+      'post__not_in'   => [ get_the_ID() ],
+
+      // Filtre par catégorie (photos de la même catégorie)
+      'tax_query'      => [
+        [
+          'taxonomy' => 'categorie',
+          'field'    => 'term_id',
+          'terms'    => $term_ids,
+        ],
+      ],
+    ];
+
+    // ====== Création de la requête personnalisée ====== //
+    $related_query = new WP_Query( $args );
+
+    // Vérifie s’il y a des photos à afficher
+    if ( $related_query->have_posts() ) {
+
+      // Boucle sur les photos apparentées
+      while ( $related_query->have_posts() ) {
+        $related_query->the_post();
+
+        // Inclusion du bloc photo réutilisable
+        get_template_part( 'template-parts/photo_block' );
+      }
+
+      // Réinitialise les données globales de WordPress
+      wp_reset_postdata();
+    }
+  }
+  ?>
+</section>    
 </main>
 
 <?php get_footer(); ?>

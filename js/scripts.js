@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-  /* ==== Ouverture de la modale + préremplissage automatique du champ “RÉF. PHOTO” (jQuery) ==== */
+  /* ==== Ouverture de la modale + préremplissage automatique du champ “RÉF. PHOTO” ==== */
 
   jQuery(document).ready(function ($) {
 

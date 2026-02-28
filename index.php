@@ -1,8 +1,9 @@
 <?php get_header(); ?>
 
 <main class="site-content">
-    <h1>Bienvenue sur mon thème WordPress personnalisé 🎉</h1>
-    <p>Ceci est la page principale (pour l'instant).</p>
+    
+    <h2>Bienvenue sur mon thème WordPress personnalisé 🎉</h2>
+    <p>Je suis la page 'index.php', la page principale (pour l'instant).</p>
     
 </main>
 
