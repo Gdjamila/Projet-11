@@ -2,7 +2,7 @@
     <div class="footer-links">
         <a href="#">MENTIONS LÉGALES</a>  
         <a href="#">VIE PRIVÉE</a>  
-        TOUS DROITS RÉSERVÉS
+        TOUS DROITS RÉSERVÉS 
     </div>
 </footer>    
     <!-- Inclusion de la modale, mais cachée par défaut -->

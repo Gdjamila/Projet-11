@@ -250,8 +250,30 @@ html, body {
   color: white;
  }
 
+/* ======================== HERO ======================== */
 
+.hero {
+    height: 140vh;
+    background-size: cover; /* l’image couvre toute la zone du conteneur */ 
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+}
 
+.hero-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 3rem;
+}
+
+ /* texte visible sur image */
+.hero__content {
+    color: #fff;              
+    text-align: center;
+}
 
 
 
