@@ -13,7 +13,9 @@
             <div class="photo-image">
                <?php the_post_thumbnail('large'); ?> <!-- Correspond à une taille d’image WordPress -->
             </div>
+            
             <!--======== Informations de la photo (champs personnalisés) ======== -->
+           
             <div class="photo-details">
                
                <h1 class="photo-title">
@@ -56,6 +58,7 @@
       <?php endwhile; endif; ?>
 
    <!-- ====================== Navigation entre les photos ====================== -->
+   
    <nav class="photo-navigation">
 
       <div class="photo-prev">
@@ -102,7 +105,7 @@
       ],
     ];
 
-    // ====== Création de la requête personnalisée ====== //
+    // === Création de la requête personnalisée === //    
     $related_query = new WP_Query( $args );
 
     // Vérifie s’il y a des photos à afficher
