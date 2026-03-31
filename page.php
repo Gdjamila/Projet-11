@@ -36,7 +36,7 @@ if ($hero_query->have_posts()) {
         </section>   
 
     <!-- ====== La liste des photos du catalogue sur la page d’accueil ====== -->
-
+    
     <section class="photo-catalog">
         <h2 class="catalog-title">Catalogue photos</h2>
     </section>  
@@ -74,6 +74,10 @@ if ($hero_query->have_posts()) {
             <p>Aucune photo trouvée.</p>
         <?php endif; ?>
     <?php endif; ?>  
+    </div>
+  <!--  Gestion du bouton avec Ajax (pagination infinie) --> 
+    <div class="load-more-container">
+        <button id="load-more">Charger plus</button>
     </div>
 
     <!-- ====== Boucle principale WordPress : affichage du contenu de la page ====== -->

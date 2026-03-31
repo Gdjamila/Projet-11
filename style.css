@@ -286,8 +286,17 @@ html, body {
 .photo-item img {
     width: 98%;
     height: 450px;
-    object-fit: cover;
+    object-fit: cover; /* cadrage propre */ 
+}
+.load-more-container {
+    text-align: center;
+    margin: 50px 0;
 }
 
+#load-more {
+    padding: 8px 8px;
+    cursor: pointer;
+    width: 150px
+}
 
  
