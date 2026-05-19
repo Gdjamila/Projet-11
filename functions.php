@@ -13,7 +13,7 @@ function mon_theme_enqueue_assets() {
     // JS principal (chargé dans le footer)
     wp_enqueue_script(
        'mon-theme-scripts',
-        get_template_directory_uri() . '/js/scripts.js',
+        get_template_directory_uri() . '/js/scripts.js', 
         array(),
         filemtime(get_template_directory() . '/js/scripts.js'),
         true        // Pour de meilleures performances
@@ -44,41 +44,73 @@ function load_more_photos() {
     // Vérifie si le numéro de page est envoyé en Ajax, sinon utilise 1 par défaut
     $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
 
-    $args = array(
+    // Récupère les valeurs envoyées par Ajax
+    $category = isset($_POST['category']) ? $_POST['category'] : '';
+    $format   = isset($_POST['format']) ? $_POST['format'] : '';
+    $sort     = isset($_POST['sort']) ? $_POST['sort'] : '';
+
+     // Construction des filtres taxonomiques
+    $tax_query = [];
+
+    if (!empty($category)) {
+        $tax_query[] = [
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $category,
+        ];
+    }
+
+    if (!empty($format)) {
+        $tax_query[] = [
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $format,
+        ];
+    }
+
+    // Gestion du tri
+    $order = 'DESC';
+
+    if ($sort === 'date_asc') {
+        $order = 'ASC';
+    }
+
+    // Arguments de la requête
+    $args = [
         'post_type'      => 'photo',
         'posts_per_page' => 8,
         'paged'          => $paged,
-    );
+        'orderby'        => 'date',
+        'order'          => $order,
+    ];
 
+    if (!empty($tax_query)) {
+        $args['tax_query'] = $tax_query;
+    }
     $query = new WP_Query($args);
-    
+
     if ($query->have_posts()) :
-        while ($query->have_posts()) : $query->the_post(); ?>
-            
+        while ($query->have_posts()) : $query->the_post(); ?>   
+         
             <!-- Réutilisation du template part existant -->
             <article class="photo-item">
                 <?php get_template_part('template-parts/photo', 'block'); ?> 
             </article>
       <?php  endwhile;
     endif;
+    
+    wp_reset_postdata();    // Réinitialise les données WordPress après WP_Query
 
-    wp_reset_postdata();
-    wp_die(); // Obligatoire pour Ajax
+    // Transmet le nombre total de pages au script Ajax
+    echo '<span class="max-pages" data-max="' . $query->max_num_pages . '"></span>';
+    
+    wp_die(); // Stoppe l'exécution après la réponse Ajax 
+     
 }
 
 // Hooks Ajax (connecté + non connecté)
 add_action('wp_ajax_load_more', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
-
-// ===  Charge le fichier style.css === //
-
-function mon_theme_enqueue_styles() {
-    wp_enqueue_style(
-        'mon-theme-style',
-        get_stylesheet_uri()
-    );
-}
-add_action( 'wp_enqueue_scripts', 'mon_theme_enqueue_styles' );
 
 // Support du titre automatique dans <title>
 add_theme_support( 'title-tag' );

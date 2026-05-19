@@ -8,6 +8,7 @@
 <body <?php body_class(); ?>>
 
 <header class="site-header">
+    
     <div class="logo">
         <?php
         if ( function_exists('the_custom_logo') ) {
@@ -18,9 +19,17 @@
     }
     ?>
     </div>
+        <!-- Le burger -->
+        <button type="button" class="menu-toggle" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
 <!--Affiche le menu dans l'en-tête --> 
-    <nav class="main-nav">
+    <nav class="main-nav"> 
+        
+    <button class="menu-close" type="button">x</button>
         <?php
         wp_nav_menu(array(      
             'theme_location' => 'main-menu', // celui déclaré dans functions.php

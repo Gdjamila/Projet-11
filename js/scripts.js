@@ -59,3 +59,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+ /* ======== Ouvrir le menu mobile (le burger avec une animation) ======== */ 
+
+// Attend que le DOM soit complètement chargé avant d’exécuter le script
+jQuery(document).ready(function ($) {
+
+    // Ouvre le menu mobile au clic sur le burger
+    $('.menu-toggle').on('click', function () {
+
+        // Affiche le menu mobile
+        $('.main-nav').addClass('active');
+
+        // Ajoute la classe "active" au burger pour lancer l’animation en croix
+        $('.menu-toggle').addClass('active');
+    });
+
+    // Ferme le menu mobile au clic sur la croix
+    $('.menu-close').on('click', function () {
+
+        // Masque le menu mobile
+        $('.main-nav').removeClass('active');
+
+        // Supprime la classe "active" du burger pour revenir à l’état initial
+        $('.menu-toggle').removeClass('active');
+    });
+
+});
+
+

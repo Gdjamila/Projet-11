@@ -3,7 +3,7 @@
                 
         <!-- Zone du titre répété -->
         <div class="contact-modal-header">
-            TACTCONTACTCONTANTACTCONTACTCON
+           TACTCONTACTCONTANTACTCONTACTCON            
         </div>
 
         <!-- Formulaire (géré par Contact Form 7) -->

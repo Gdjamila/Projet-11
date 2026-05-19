@@ -32,8 +32,9 @@ html, body {
   font-display: swap; 
 }
 
-/* ======================== Header ======================== */
+/* ======================== Header desktop ======================== */
 
+/* Structure header */
 .site-header {
     display: flex;                 /* disposition en ligne */
     justify-content: space-between; /* espace entre logo et menu */
@@ -42,6 +43,7 @@ html, body {
     background-color: #fff;         /* fond blanc */
     border-bottom: 1px solid #434141; /* bordure grise */
 }
+
 .site-header .logo a {
     text-decoration: none;
     font-size: 24px;
@@ -66,7 +68,7 @@ html, body {
     color: #000000;
     font-family: "SpaceMono-Regular", sans-serif;
     font-weight: 300;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
     font-size: 14px;
 }
 
@@ -74,7 +76,15 @@ html, body {
 .site-header nav a:hover {
     font-size: 15px;
     font-weight: 00; 
-    color: rgb(205, 108, 108);
+    color: violet;
+}
+
+/* ===== Contenu des pages ===== */
+
+.page-content {
+    padding: 60px 80px;
+    line-height: 1.8;
+    font-size: 16px;
 }
 
  /* ======================== footer ======================== */
@@ -115,7 +125,9 @@ html, body {
   margin-bottom: 25px;
   padding: 0;
  }
-/* La modale est cachée par défaut */
+
+/* ====== La modale est cachée par défaut ====== */
+
 #contact-modal.contact-modal {
   display: none;           /* masqué par défaut */
   position: fixed;         /* overlay entire viewport */
@@ -140,8 +152,7 @@ html, body {
   padding-top: 30px; 
   border-radius: 8px;
   max-width: 352px;
-  width: calc(100% - 40px);
-  
+  width: calc(100% - 40px);  
   box-shadow: 0 10px 30px rgba(0,0,0,0.12);
   transform: translateY(0);
   border-left: 10px solid black;
@@ -153,7 +164,8 @@ html, body {
   background-color: white;
   min-height: 500px; /* hauteur min fixe pour que le contenu ne “saute” pas trop quand le message s’ajoute : */
 }
-/* ======================== le formulaire ======================== */
+
+/* ========== le formulaire ========== */
 
 /* Le formulaire reste centré dans la modale */
 .wpcf7 form {
@@ -251,7 +263,7 @@ html, body {
   color: white;
  }
 
-/* ======================== HERO ======================== */
+/* ======================== Desktop : HERO ======================== */
 
 .hero {
     height: 140vh;
@@ -263,31 +275,218 @@ html, body {
 
 .hero-title {
     position: absolute;
-    top: 50%;
+    font-family: "Space Mono", monospace;
+    font-size: clamp(30px, 6vw, 80px);
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
-    font-size: 3rem;
-}
-
- /* texte visible sur image */
-.hero__content {
-    color: #fff;              
+    font-style: italic;    
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255,255,255,0.8);
     text-align: center;
-}
-/* ======================== La Grille des images ========================*/
+    margin: 0;
+    letter-spacing: .1em;  
+    white-space: nowrap;       
+} 
+ 
+/* ======================== Desktop : Les filtres et la Grille des images ========================*/
 
-.photo-grid {
+/* le conteneur principal */ 
+.container {
+    max-width: 100%;;    
+    background-color: greenyellow; 
+    margin: 0 auto;
+    padding: 0 20px;   
+} 
+
+/* bloc filtres et Grille des images centré et plus étroit */
+.inner-content {
+    max-width: 1000px; 
+    margin: 0 auto;
+    background-color: blanchedalmond;   
+    padding: 30px 20px 10px;
+} 
+
+/* la grille  */
+.photo-grid { 
     display: grid;
+    margin-top: 0; 
     grid-template-columns: repeat(2, 1fr);
-    gap: auto; 
-    padding: 0 50px; /* espace gauche et droite */
+    gap: 10px; 
+    background-color: red; 
+    padding-top: 0;
+    margin: 0;
+} 
+.filters {
+    flex-wrap: wrap;
 }
+
+/* le bloc de chaque photo */
+.photo-item {
+    position: relative;
+    width: 100%;
+    padding-top: 100%; /* crée le carré */
+    overflow: hidden;
+}
+
 .photo-item img {
-    width: 98%;
-    height: 450px;
-    object-fit: cover; /* cadrage propre */ 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
+/*conteneur des filtres */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 25px 0;
+    padding: 0;
+    background-color: #ffb900;   
+}
+/* les selecteurs */
+.filters select {
+    background-color: rgb(248, 248, 248);
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    height: 35px;
+    border-radius: 5px;
+    width: 18em;
+}
+
+#filter-category {
+    margin-right: 0;      
+}
+
+#filter-format {   
+    margin-right: auto;  
+}
+ 
+#filter-sort {
+    margin-left: auto;     
+}
+.filters select:focus {
+    border: 2px solid greenyellow;
+}
+
+/* Style des options */
+.filters select option {
+    background-color: white;
+    color: black;
+}
+
+/* cache le select natif */
+.filters select {
+    display: none;
+}
+/*   */
+
+
+
+
+/*    */
+
+ /* ================ Desktop : filter visual =============== */
+
+.custom-select {
+    position: relative;
+    min-width: 150px;
+    background-color: rgb(10, 48, 14);
+}
+
+.custom-sort {
+    margin-left: auto;
+}
+
+/* Zone de texte du filtre */
+.select-selected {
+    background: #f8f8f8;
+    padding: 5px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    width: clamp(202px, 18vw, 12em);
+    position: relative;
+    padding: 5px 30px 5px 10px; /* espace à droite pour la flèche */
+    font-size: medium;
+}
+
+/* Flèche */
+.select-selected::after {
+    content: "▾"; /* petite flèche */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 20px;
+}
+/* Rotation de la Flèche */
+.select-selected.active::after {
+    transform: translateY(-50%) rotate(-175deg);
+}
+
+/* le menu déroulant  */
+.select-options {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid gray;
+    display: none;
+    z-index: 10;
+}
+
+/* chaque option du menu déroulant*/
+.select-options div {
+    background: #FFF;
+    color: #313144;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: small;
+}
+
+.select-options div.selected {
+    background: #E00000;
+}
+
+/* Hover */
+.select-options div:hover {
+    background: #FFD6D6;
+}
+
+/* Pression / clic */
+.select-options div:active {
+    background: #FE5858;
+}
+
+
+
+
+/* Option sélectionnée  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+.select-options div.selected {
+    background:black;
+    color: #fff;
+} */
+
+.filters > select {
+    display: none;
+}
+
+/*  ============= Message : Aucune photo trouvée  =============*/
+.no-results {
+    color: rgb(153, 51, 85);
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* ========================== le Bouton 'Charger plus' =============================== */
+
 .load-more-container {
     text-align: center;
     margin: 50px 0;
@@ -296,7 +495,226 @@ html, body {
 #load-more {
     padding: 8px 8px;
     cursor: pointer;
-    width: 150px
+    width: 150px;
+    transition: all 0.3s ease;
+}
+#load-more:hover {
+    background-color: burlywood;
+    color: whitesmoke;
+    font-size: 16px;
+    border: 1px solid black;
 }
 
- 
+ /* ========================== VERSION MOBILE  ========================== */
+
+    /* Croix cachée par défaut */
+    .menu-close {
+        display: none;
+    }
+
+@media (max-width: 768px) { 
+
+    .hero {
+        height: 45vh;
+        background-size: cover; /* l’image couvre toute la zone du conteneur */ 
+        background-position: center;
+        position: relative;
+        background-repeat: no-repeat;
+    }
+    .hero-title {
+        font-size: clamp(28px, 8vw, 48px);
+        top: 50%;
+        width: 90%;
+        line-height: 1.2;
+         -webkit-text-stroke: 1.5px rgba(255,255,255,0.8);
+        letter-spacing: 0.05em;
+        color: transparent;   
+    }
+    
+    /* Header mobile */
+    .site-header {
+        padding: 15px 20px;
+    }
+
+    /* Bouton burger */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        padding-right: 20px;
+        cursor: pointer;
+    }
+
+    /* Traits du burger */
+    .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: #000;
+        margin: 5px 0;
+        /* changé */
+        transition: transform 2s ease, opacity 2s ease;
+    }
+       
+    /* Animation des traits du burger */
+    .menu-toggle span {
+        transition: all 2s ease;
+    }
+
+    /* 1er trait → diagonale */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    /* 2e trait → disparaît */
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    /* 3e trait → diagonale */
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    } 
+       
+    /* Menu caché par défaut */
+    .main-nav {
+        display: none;
+    }
+
+    /* Menu ouvert */
+    .main-nav.active {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        background-color: red;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    /* Croix visible uniquement quand le menu est ouvert */
+    .main-nav.active .menu-close {
+        display: block;
+        position: absolute;
+        top: 40px;
+        right: 28px;
+        background: none;
+        border: none;
+        font-size: 42px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 10000;
+    }
+
+    /* Liste du menu */
+    .main-nav.active .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Élément de menu */
+    .main-nav.active .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Liens du menu */
+    .main-nav.active a,
+    .main-nav.active a:visited,
+    .main-nav.active a:hover,
+    .main-nav.active a:active {
+        display: block;
+        width: 100%;
+        color: #fff;
+        font-size: 2em;
+        font-family: "SpaceMono-Regular", sans-serif;
+        text-transform: uppercase;
+        text-decoration: none;
+    } 
+    
+    /* ========== FILTRES ========== */
+    
+    .filters {
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 30px;
+    }
+    .custom-select {
+        width: 80%;
+    }
+   
+    .select-selected {
+        width: 100%;
+        padding: 15px 15px;
+        font-size: 16px;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+
+    .custom-sort {
+        margin-left: 0;
+    }
+
+    .select-options div:hover {
+    background: #FFD6D6;
+}
+
+.select-options div:active {
+    background: #FE5858;
+}
+
+    /* ===== GRILLE ===== */    
+    .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    /* ==== Footer ====== */
+    .site-footer {
+        padding: 30px 20px;
+        border-top: 1px solid gray;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footer-links a,
+    .footer-links {
+        font-family: "SpaceMono-Regular", sans-serif;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #000;
+        text-decoration: none;
+    } 
+} 
+
+/* ===== DESKTOP (burger caché) ===== */
+
+@media (min-width: 769px) {
+    .menu-toggle {
+        display: none;
+    }
+}
+
+/* ===== Contenu des pages : Version mobile ===== */
+
+@media (max-width: 768px) {
+
+    .page-content {
+        padding: 40px 20px;
+        font-size: 15px;
+        line-height: 1.7;
+    }
+}
