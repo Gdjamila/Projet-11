@@ -39,12 +39,7 @@ if ($hero_query->have_posts()) {
             <h1 class="hero-title">Photographe event</h1>
         </section>   
 
-        <!-- ====== La liste des photos du catalogue sur la page d’accueil ====== 
-    
-        <section class="photo-catalog">
-            <h2 class="catalog-title">Catalogue photos</h2>
-        </section>  -->
-
+        
        <!-- =========== Le filtre Catégories : Select d’origine utilisé pour la logique Ajax =========== -->
        
         <div class="container">
@@ -56,8 +51,7 @@ if ($hero_query->have_posts()) {
                     <select id="filter-category">
                 
                         <!-- Option par défaut (aucun filtre sélectionné) -->
-                        <option value="">Catégories</option> 
-                    <!-- <option value="" disabled selected hidden>Catégories</option> -->
+                        <option value="">Catégories</option>                        
                     
                         <?php
                         // Récupère toutes les catégories de la taxonomy "categorie"
@@ -87,7 +81,7 @@ if ($hero_query->have_posts()) {
                         <div class="select-options">
 
                             <!-- Option pour réinitialiser le filtre -->
-                            <div data-value="">Catégories</div>
+                            <div data-value="" data-label="Catégories">&nbsp;</div>
                             <!-- <div data-value="" disabled selected hidden>Catégories</div> -->
 
                             <!-- Génère les options dynamiquement depuis WordPress -->
@@ -105,8 +99,7 @@ if ($hero_query->have_posts()) {
                     
                         <!-- Option pour réinitialiser le filtre -->
                         <option value=""> Formats</option>
-                        <!-- <option value="" disabled selected hidden> Formats</option> -->
-                    
+                                            
                         <?php
                         $terms = get_terms(array(   // Récupère les termes de la taxonomy afin d'alimenter dynamiquement le select
                             'taxonomy' => 'format', // Nom de la taxonomy personnalisée
@@ -133,8 +126,8 @@ if ($hero_query->have_posts()) {
 
                         <div class="select-options">
 
-                            <!-- Reset du filtre -->
-                            <div data-value="">Formats</div>
+                            <!-- Reset du filtre -->                            
+                            <div data-value="" data-label="Formats">&nbsp;</div>
 
                             <!-- Options dynamiques -->
                             <?php foreach ($terms as $term) : ?>
@@ -149,9 +142,9 @@ if ($hero_query->have_posts()) {
                     <!--======= le filtre Trier par : Select d’origine utilisé pour la logique Ajax ========== -->
                                 
                     <select id="filter-sort">
-                        <!-- Option pour réinitialiser le tri -->
-                        <option value=" ">Trier par</option>
-                        <!-- <option value="" disabled selected hidden>Trier par</option> -->
+                        <!-- Option pour réinitialiser le tri 
+                        <option value=" ">Trier par</option> -->
+                        <div data-value="" data-label="Trier">Trier</div>
 
                         <option value="date_desc">À partir des plus récentes</option>
                         <option value="date_asc">À partir des plus anciennes</option>
@@ -165,9 +158,9 @@ if ($hero_query->have_posts()) {
                         <div class="select-selected">Trier par</div>
 
                         <div class="select-options">
-
+                            
                             <!-- Reset du tri -->
-                            <div data-value="">Trier par</div>
+                            <div data-value="" data-label="Trier">&nbsp;</div>
 
                             <div data-value="date_desc">À partir des plus récentes</div>
                             <div data-value="date_asc">À partir des plus anciennes</div>
@@ -191,7 +184,7 @@ if ($hero_query->have_posts()) {
                         // Vérifie si la requête retourne des photos
                         if ($photo_query->have_posts()) :
 
-                            // Boucle sur les photos
+                        // Boucle sur les photos
                         while ($photo_query->have_posts()) : $photo_query->the_post();
                     ?>
                             <!-- Affichage d'une photo -->
@@ -235,7 +228,7 @@ if ($hero_query->have_posts()) {
             </article>
 
         <?php endwhile; else :  ?>
-            <p>Aucun contenu trouvé.</p>
+            <p class="no-content">Aucun contenu trouvé.</p>
         <?php endif; ?>   
 </main>
 

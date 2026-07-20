@@ -32,7 +32,27 @@ function mon_theme_enqueue_assets() {
     wp_localize_script('load-more', 'ajax_params', array(
         'ajax_url' => admin_url('admin-ajax.php'),
     ));
-}
+
+ /* === Script gérant le chargement la lightbox  === */
+    wp_enqueue_script(
+        'lightbox',
+        get_template_directory_uri() . '/js/lightbox.js',
+        array(),
+        null,
+        true
+    );
+   
+ /* === Script de navigation entre les photos, (miniature au survol des flèches précédente/suivante) === */
+    wp_enqueue_script( 
+        'photo-navigation',
+        get_template_directory_uri() . '/js/photo-navigation.js',
+        array(),
+        null,
+        true
+    );
+
+    }
+    
 // Hook WordPress pour charger les scripts et styles du thème
 add_action('wp_enqueue_scripts', 'mon_theme_enqueue_assets');
 
@@ -94,7 +114,7 @@ function load_more_photos() {
          
             <!-- Réutilisation du template part existant -->
             <article class="photo-item">
-                <?php get_template_part('template-parts/photo', 'block'); ?> 
+                <?php get_template_part('template-parts/photo-block'); ?> 
             </article>
       <?php  endwhile;
     endif;
@@ -140,6 +160,10 @@ function mon_theme_supports() {
 add_action('after_setup_theme', 'mon_theme_supports');
 
 ?> 
+
+
+
+
 
 
 

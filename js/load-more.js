@@ -1,5 +1,5 @@
 // Variable partagée entre les filtres et le bouton "Charger plus"
-let page = 2;
+let page = 2; // au clic sur "Charger plus", on charge la page 2
 
 /* ============ Filtres : catégories, formats et tri ============ */
 
@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
 
                 // si Aucun résultat → afficher message et masque le bouton
                 if (filteredPhotos === 0) {
-                    $('.photo-grid').html('<p>Aucune photo trouvée.</p>');
+                    $('.photo-grid').html('<p class="no-results">Aucune photo trouvée.</p>');
                     $('#load-more').hide();
                     return;
                 }
@@ -88,11 +88,10 @@ document.querySelectorAll('.custom-select').forEach(select => {
             otherOptions.style.display = 'none';
         }
     });
-    /* ..*/
+    
     // Rotation de la flèche
     selected.classList.toggle('active');
 
-    /* ..*/
     // Ouvre ou ferme la liste du select cliqué
     options.style.display = options.style.display === 'block' ? 'none' : 'block';
     });  
@@ -105,7 +104,10 @@ document.querySelectorAll('.custom-select').forEach(select => {
             selected.classList.remove('active'); // la flèche revient à sa position normale             
                      
             // Met à jour le texte affiché
-            selected.textContent = option.textContent;
+            /* selected.textContent = option.textContent; */
+            
+            const optionLabel = option.dataset.label || option.textContent.trim();
+            selected.textContent = optionLabel;
 
             // Supprime la classe "selected" des autres options
             options.querySelectorAll('div').forEach(otherOption => {
@@ -158,9 +160,9 @@ jQuery(document).ready(function ($) {
                 sort: sort
             },
             success: function (response) {
-
-             // Si aucune photo supplémentaire n'est retournée, masque le bouton     
-                                   
+                console.log(response);
+                               
+             // Si aucune photo supplémentaire n'est retournée, masque le bouton                                   
                     if ($.trim(response) === '') {
 
                     // Cache le bouton
@@ -201,10 +203,15 @@ jQuery(document).ready(function ($) {
                         $('#load-more').text('Charger plus');
                     }, 70);
                 }
-            }
-        });
+            },
+            error: function () {
+        console.log('Erreur Ajax');
+    }
 
+        });
+         
     });
+    
 
 });
 

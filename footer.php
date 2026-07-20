@@ -15,9 +15,12 @@
 </footer>    
     <!-- Inclusion de la modale, mais cachée par défaut -->
     <?php get_template_part('template-parts/modal', 'contact'); ?>
+
+    <!-- Inclusion de la lightbox -->
+    <?php get_template_part('template-parts/lightbox'); ?>
     
     <!-- Hook WordPress pour charger les scripts -->
-    <?php wp_footer(); ?>
+    <?php wp_footer(); ?> 
 
 </body>
 </html>
